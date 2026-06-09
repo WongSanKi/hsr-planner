@@ -10,7 +10,7 @@ const createEmptyScreenshot = (index) => ({
   accountId: index + 1,
   accountName: `帳號${index + 1}`,
   imageUrl: '',
-  stars: 0,
+  stars: '',
 })
 
 const createEmptyRecord = () => ({
@@ -392,8 +392,8 @@ function ScreenshotThumb({ shot, setLightboxImg }) {
       ) : (
         <div className="screenshot-empty">📷</div>
       )}
-      {shot.stars > 0 && (
-        <span className="screenshot-stars">{'⭐'.repeat(Math.min(shot.stars, 12))} {shot.stars}</span>
+      {shot.stars && (
+        <span className="screenshot-stars">⭐ {shot.stars}</span>
       )}
     </div>
   )
@@ -502,13 +502,11 @@ function RecordForm({ record, onSave, onCancel }) {
                       placeholder="帳號名"
                     />
                     <input
-                      type="number"
+                      type="text"
                       value={shot.stars}
-                      onChange={(e) => updateScreenshot(i, 'stars', Number(e.target.value))}
+                      onChange={(e) => updateScreenshot(i, 'stars', e.target.value)}
                       className="shot-stars-input"
-                      placeholder="星數"
-                      min={0}
-                      max={12}
+                      placeholder="例：12/12"
                     />
                     <span className="stars-label">⭐</span>
                     {form.screenshots.length > 1 && (
