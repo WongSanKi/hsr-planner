@@ -1,0 +1,528 @@
+/* ===== 草稿紙頁面 ===== */
+
+.scratchpad-page {
+  height: calc(100vh - 60px); /* 減去 navbar 高度 */
+  overflow: hidden;
+}
+
+.scratchpad-layout {
+  display: flex;
+  height: 100%;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  font-size: 1.2rem;
+  opacity: 0.6;
+}
+
+/* ===== 左側面板 ===== */
+
+.scratchpad-sidebar {
+  width: 220px;
+  min-width: 220px;
+  border-right: 1px solid rgba(128, 128, 128, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1rem 0.8rem;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+}
+
+.sidebar-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.new-pad-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  background: transparent;
+  color: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.new-pad-btn:hover {
+  background: rgba(76, 175, 80, 0.15);
+  border-color: #4CAF50;
+  color: #4CAF50;
+}
+
+.pad-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.pad-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-bottom: 2px;
+}
+
+.pad-item:hover {
+  background: rgba(128, 128, 128, 0.1);
+}
+
+.pad-item.active {
+  background: rgba(76, 175, 80, 0.15);
+  font-weight: 600;
+}
+
+.pad-title {
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.delete-pad-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pad-item:hover .delete-pad-btn {
+  opacity: 0.5;
+}
+
+.delete-pad-btn:hover {
+  opacity: 1 !important;
+  background: rgba(244, 67, 54, 0.15);
+  color: #f44336;
+}
+
+.rename-input {
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgba(76, 175, 80, 0.5);
+  border-radius: 4px;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.85rem;
+  color: inherit;
+  outline: none;
+}
+
+/* ===== 右側主區域 ===== */
+
+.scratchpad-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.scratchpad-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1.5rem;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.pad-info {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.current-pad-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.pad-updated {
+  font-size: 0.75rem;
+  opacity: 0.5;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.last-saved {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+.save-btn {
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.save-btn.has-changes {
+  background: #4CAF50;
+  color: white;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+.save-btn.has-changes:hover {
+  background: #43A047;
+  transform: translateY(-1px);
+}
+
+.save-btn:disabled {
+  background: rgba(128, 128, 128, 0.3);
+  color: rgba(128, 128, 128, 0.8);
+  cursor: default;
+  box-shadow: none;
+  transform: none;
+}
+
+.error-msg {
+  background: rgba(244, 67, 54, 0.1);
+  border: 1px solid rgba(244, 67, 54, 0.3);
+  padding: 0.8rem 1rem;
+  margin: 0 1.5rem;
+  border-radius: 8px;
+  color: #f44336;
+}
+
+/* ===== 工具列 ===== */
+
+.scratchpad-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+  background: rgba(128, 128, 128, 0.03);
+}
+
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.toolbar-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(128, 128, 128, 0.2);
+  margin: 0 6px;
+}
+
+.toolbar-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.toolbar-btn:hover {
+  background: rgba(128, 128, 128, 0.15);
+}
+
+.toolbar-btn.active {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+}
+
+/* ===== 編輯器 ===== */
+
+.editor-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+.scratchpad-editor .tiptap {
+  min-height: 100%;
+  outline: none;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.scratchpad-editor .tiptap > * + * {
+  margin-top: 0.75em;
+}
+
+/* 標題 */
+.scratchpad-editor .tiptap h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+}
+
+.scratchpad-editor .tiptap h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1.2rem;
+}
+
+.scratchpad-editor .tiptap h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+/* 引用 */
+.scratchpad-editor .tiptap blockquote {
+  border-left: 3px solid rgba(128, 128, 128, 0.3);
+  padding-left: 1rem;
+  margin-left: 0;
+  opacity: 0.85;
+  font-style: italic;
+}
+
+/* 代碼 */
+.scratchpad-editor .tiptap code {
+  background: rgba(128, 128, 128, 0.1);
+  border-radius: 4px;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.85em;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.scratchpad-editor .tiptap pre {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.scratchpad-editor .tiptap pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.85rem;
+}
+
+/* 表格 */
+.scratchpad-editor .tiptap table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  margin: 1rem 0;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.scratchpad-editor .tiptap table td,
+.scratchpad-editor .tiptap table th {
+  min-width: 80px;
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  padding: 0.5rem 0.8rem;
+  vertical-align: top;
+  position: relative;
+}
+
+.scratchpad-editor .tiptap table th {
+  font-weight: 600;
+  background: rgba(128, 128, 128, 0.08);
+}
+
+.scratchpad-editor .tiptap table .selectedCell {
+  background: rgba(76, 175, 80, 0.1);
+}
+
+/* 分隔線 */
+.scratchpad-editor .tiptap hr {
+  border: none;
+  border-top: 2px solid rgba(128, 128, 128, 0.15);
+  margin: 1.5rem 0;
+}
+
+/* 列表 */
+.scratchpad-editor .tiptap ul,
+.scratchpad-editor .tiptap ol {
+  padding-left: 1.5rem;
+}
+
+.scratchpad-editor .tiptap li {
+  margin-bottom: 0.3rem;
+}
+
+/* Highlight */
+.scratchpad-editor .tiptap mark {
+  border-radius: 3px;
+  padding: 0.1rem 0.2rem;
+}
+
+/* Placeholder */
+.scratchpad-editor .tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  opacity: 0.35;
+  pointer-events: none;
+  height: 0;
+}
+
+/* ===== 主題適配 ===== */
+
+/* 深色 */
+.scratchpad-page.dark {
+  color: #e0e0e0;
+}
+
+.scratchpad-page.dark .scratchpad-sidebar {
+  border-right-color: rgba(255, 255, 255, 0.08);
+}
+
+.scratchpad-page.dark .scratchpad-toolbar {
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.scratchpad-page.dark .scratchpad-editor .tiptap pre {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* 淺色 */
+.scratchpad-page.light {
+  color: #333;
+  background: #fff;
+}
+
+.scratchpad-page.light .scratchpad-sidebar {
+  background: #f8f9fa;
+}
+
+.scratchpad-page.light .pad-item.active {
+  background: rgba(76, 175, 80, 0.1);
+}
+
+.scratchpad-page.light .toolbar-btn.active {
+  background: rgba(76, 175, 80, 0.12);
+}
+
+/* Matrix */
+.scratchpad-page.matrix {
+  color: #00ff00;
+}
+
+.scratchpad-page.matrix .scratchpad-sidebar {
+  border-right-color: rgba(0, 255, 0, 0.15);
+}
+
+.scratchpad-page.matrix .pad-item.active {
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.scratchpad-page.matrix .toolbar-btn.active {
+  background: rgba(0, 255, 0, 0.15);
+  color: #00ff00;
+}
+
+.scratchpad-page.matrix .scratchpad-toolbar {
+  border-bottom-color: rgba(0, 255, 0, 0.1);
+}
+
+.scratchpad-page.matrix .scratchpad-editor .tiptap table td,
+.scratchpad-page.matrix .scratchpad-editor .tiptap table th {
+  border-color: rgba(0, 255, 0, 0.2);
+}
+
+.scratchpad-page.matrix .save-btn.has-changes {
+  background: #00ff00;
+  color: #000;
+}
+
+/* Space */
+.scratchpad-page.space {
+  color: #c8d6e5;
+}
+
+.scratchpad-page.space .scratchpad-sidebar {
+  border-right-color: rgba(130, 177, 255, 0.15);
+}
+
+.scratchpad-page.space .pad-item.active {
+  background: rgba(130, 177, 255, 0.12);
+}
+
+.scratchpad-page.space .toolbar-btn.active {
+  background: rgba(130, 177, 255, 0.15);
+  color: #82b1ff;
+}
+
+.scratchpad-page.space .save-btn.has-changes {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+/* ===== RWD ===== */
+@media (max-width: 768px) {
+  .scratchpad-layout {
+    flex-direction: column;
+  }
+
+  .scratchpad-sidebar {
+    width: 100%;
+    min-width: unset;
+    max-height: 150px;
+    border-right: none;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+  }
+
+  .pad-list {
+    display: flex;
+    overflow-x: auto;
+    padding: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .pad-item {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .editor-wrapper {
+    padding: 1rem;
+  }
+
+  .scratchpad-toolbar {
+    overflow-x: auto;
+  }
+}

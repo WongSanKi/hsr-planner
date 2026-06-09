@@ -1,0 +1,238 @@
+/* ========== TODO TABLE ========== */
+.todo-table-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow-x: auto;
+  box-shadow: var(--shadow);
+}
+
+.todo-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.todo-table th {
+  padding: 12px 14px;
+  text-align: center;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.th-event {
+  text-align: left !important;
+  min-width: 160px;
+  width: 18%;
+}
+
+.th-account {
+  width: 13%;
+}
+
+.th-actions {
+  width: 50px;
+}
+
+.todo-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.todo-table tr:last-child td {
+  border-bottom: none;
+}
+
+.todo-table tr:nth-child(even) td {
+  background: var(--table-stripe);
+}
+
+/* Event Input */
+.event-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.event-input:hover,
+.event-input:focus {
+  background: var(--input-bg);
+  border-color: var(--border);
+}
+
+.event-input:focus {
+  border-color: var(--accent);
+}
+
+
+/* ========== Checkbox Cell ========== */
+.td-cell {
+  text-align: center;
+  padding: 6px 10px;
+}
+
+.cell-checkbox {
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: all 0.15s;
+}
+
+.cell-checkbox:hover {
+  border-color: var(--accent);
+  background: rgba(99, 102, 241, 0.05);
+  transform: scale(1.1);
+}
+
+.cell-checkbox.checked {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+}
+
+/* ========== Progress ========== */
+.th-progress {
+  width: 60px;
+  text-align: center;
+}
+
+.td-progress {
+  text-align: center;
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.progress-done {
+  color: #10b981;
+}
+
+/* ========== Row Complete ========== */
+.row-complete .event-input {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+/* Add Row Button */
+.btn-add-row {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 1rem;
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-add-row:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--bg-card);
+}
+
+/* Error Banner */
+.error-banner {
+  padding: 10px 16px;
+  margin-bottom: 1rem;
+  background: rgba(255, 80, 80, 0.1);
+  border: 1px solid rgba(255, 80, 80, 0.3);
+  border-radius: 8px;
+  color: #ff6b6b;
+  font-size: 0.85rem;
+}
+
+/* Actions column */
+.td-actions {
+  text-align: center;
+}
+
+/* ========== Column Name Input ========== */
+.column-name-input {
+  width: 100%;
+  padding: 4px 8px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.column-name-input:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border);
+}
+
+.column-name-input:focus {
+  background: var(--input-bg);
+  border-color: var(--accent);
+}
+
+/* ========== Column Controls ========== */
+.column-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.btn-col {
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-col:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-col-danger:hover {
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
+
+.btn-col:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.col-count {
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  margin-left: auto;
+}

@@ -1,0 +1,206 @@
+.admin-denied {
+  text-align: center;
+  padding: 4rem 2rem;
+  opacity: 0.7;
+}
+
+.admin-message {
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.admin-message.success {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #22c55e;
+}
+
+.admin-message.error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+.admin-message.warn {
+  background: rgba(234, 179, 8, 0.15);
+  border: 1px solid rgba(234, 179, 8, 0.3);
+  color: #eab308;
+}
+
+.msg-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  opacity: 0.6;
+  color: inherit;
+}
+
+.admin-stats {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: rgba(128, 128, 128, 0.08);
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.stat-number {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+.admin-table-container {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(128, 128, 128, 0.15);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.admin-table th {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  opacity: 0.6;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+}
+
+.admin-table td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.08);
+}
+
+.admin-table tr.current-user {
+  background: rgba(76, 175, 80, 0.05);
+}
+
+.td-username {
+  font-weight: 600;
+}
+
+.badge-self {
+  font-size: 0.75rem;
+  opacity: 0.5;
+  font-weight: normal;
+  margin-left: 0.3rem;
+}
+
+.td-id code {
+  font-size: 0.8rem;
+  opacity: 0.5;
+  background: rgba(128, 128, 128, 0.1);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+.td-date {
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+.role-badge {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.role-badge.admin {
+  background: rgba(234, 179, 8, 0.2);
+  color: #eab308;
+}
+
+.role-badge.user {
+  background: rgba(128, 128, 128, 0.1);
+  opacity: 0.7;
+}
+
+.td-actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.btn-sm {
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s;
+}
+
+.btn-sm:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.btn-sm.btn-outline {
+  border-color: rgba(128, 128, 128, 0.3);
+  background: transparent;
+  color: inherit;
+}
+
+.btn-sm.btn-outline:hover:not(:disabled) {
+  background: rgba(128, 128, 128, 0.1);
+}
+
+.btn-sm.btn-warning {
+  background: rgba(234, 179, 8, 0.15);
+  color: #eab308;
+  border-color: rgba(234, 179, 8, 0.3);
+}
+
+.btn-sm.btn-warning:hover {
+  background: rgba(234, 179, 8, 0.25);
+}
+
+.btn-sm.btn-danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.btn-sm.btn-danger:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.25);
+}
+
+.btn-danger-outline {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  background: transparent;
+  color: #ef4444;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-danger-outline:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
