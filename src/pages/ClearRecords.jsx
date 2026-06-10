@@ -16,7 +16,6 @@ const createEmptyScreenshot = (index) => ({
 const createEmptyRecord = () => ({
   id: Date.now().toString(),
   version: '',
-  period: 1,
   challengeType: '混沌回憶',
   date: new Date().toISOString().slice(0, 10),
   note: '',
@@ -43,7 +42,6 @@ export default function ClearRecords() {
     }
   }, [data])
 
-  // 儲存
   const handleSave = async () => {
     await saveData({ records })
     setHasChanges(false)
@@ -65,26 +63,22 @@ export default function ClearRecords() {
     return () => clearTimeout(timer)
   }, [records, hasChanges, saveData])
 
-  // 新增記錄
   const handleAdd = () => {
     setEditingRecord(createEmptyRecord())
     setShowForm(true)
   }
 
-  // 編輯記錄
   const handleEdit = (record) => {
     setEditingRecord({ ...record, screenshots: [...record.screenshots] })
     setShowForm(true)
   }
 
-  // 刪除記錄
   const handleDelete = (id) => {
     if (!window.confirm('確定要刪除這筆記錄嗎？')) return
     setRecords(prev => prev.filter(r => r.id !== id))
     setHasChanges(true)
   }
 
-  // 表單儲存
   const handleFormSave = (record) => {
     const exists = records.find(r => r.id === record.id)
     if (exists) {
@@ -97,25 +91,21 @@ export default function ClearRecords() {
     setHasChanges(true)
   }
 
-  // 取得所有版本號
   const versions = [...new Set(records.map(r => r.version))].sort((a, b) => b.localeCompare(a))
 
-  // 取得所有帳號名稱（從記錄中動態收集）
   const allAccountNames = [...new Set(
     records.flatMap(r => r.screenshots.map(s => s.accountName))
   )].sort()
 
-  // 過濾
   const filteredRecords = records.filter(r => {
     if (filterVersion !== 'all' && r.version !== filterVersion) return false
     if (filterType !== 'all' && r.challengeType !== filterType) return false
     return true
   }).sort((a, b) => {
     if (a.version !== b.version) return b.version.localeCompare(a.version)
-    return b.period - a.period
+    return b.date.localeCompare(a.date)
   })
 
-  // 按版本分組
   const groupedByVersion = filteredRecords.reduce((acc, record) => {
     if (!acc[record.version]) acc[record.version] = []
     acc[record.version].push(record)
@@ -133,7 +123,6 @@ export default function ClearRecords() {
 
   return (
     <div className={`clear-records-page ${theme}`}>
-      {/* 頂部 */}
       <div className="page-header">
         <h1 className="page-title">🏆 通關記錄</h1>
         <div className="header-actions">
@@ -146,7 +135,6 @@ export default function ClearRecords() {
 
       {error && <div className="error-banner">⚠️ {error}</div>}
 
-      {/* 工具列 */}
       <div className="records-toolbar">
         <button className="btn-add-record" onClick={handleAdd}>＋ 新增記錄</button>
 
@@ -168,7 +156,6 @@ export default function ClearRecords() {
         <span className="record-count">共 {filteredRecords.length} 筆記錄</span>
       </div>
 
-      {/* 主內容區 - 根據佈局切換 */}
       {filteredRecords.length === 0 ? (
         <div className="empty-state">
           <span className="empty-icon">📭</span>
@@ -203,7 +190,6 @@ export default function ClearRecords() {
         />
       )}
 
-      {/* 新增/編輯表單 Modal */}
       {showForm && (
         <RecordForm
           record={editingRecord}
@@ -212,7 +198,6 @@ export default function ClearRecords() {
         />
       )}
 
-      {/* 圖片 Lightbox */}
       {lightboxImg && (
         <div className="lightbox" onClick={() => setLightboxImg(null)}>
           <img src={lightboxImg} alt="通關截圖" />
@@ -269,7 +254,6 @@ function AccordionLayout({ groupedByVersion, expandedId, setExpandedId, onEdit, 
                 <div className="accordion-header-info">
                   <span className={`type-tag type-${record.challengeType}`}>{record.challengeType}</span>
                   <span className="accordion-date">{record.date}</span>
-                  <span className="accordion-period">第 {record.period} 期</span>
                 </div>
                 <span className="accordion-arrow">{expandedId === record.id ? '▼' : '▶'}</span>
               </div>
@@ -327,7 +311,6 @@ function MagazineLayout({ records, onEdit, onDelete, filterAccount, setLightboxI
           </div>
           <div className="magazine-card-body">
             <div className="magazine-meta">
-              <span>第 {record.period} 期</span>
               <span>{record.date}</span>
             </div>
             {record.note && <p className="magazine-note">{record.note}</p>}
@@ -351,7 +334,6 @@ function RecordCard({ record, onEdit, onDelete, filterAccount, setLightboxImg })
       <div className="record-card-header" onClick={() => setExpanded(!expanded)}>
         <div className="record-card-info">
           <span className={`type-tag type-${record.challengeType}`}>{record.challengeType}</span>
-          <span className="record-period">第 {record.period} 期</span>
           <span className="record-date">{record.date}</span>
         </div>
         <span className="expand-arrow">{expanded ? '▼' : '▶'}</span>
@@ -437,7 +419,6 @@ function RecordForm({ record, onSave, onCancel }) {
         </div>
 
         <div className="form-body">
-          {/* 基本資訊 */}
           <div className="form-row">
             <div className="form-group">
               <label>版本</label>
@@ -446,15 +427,6 @@ function RecordForm({ record, onSave, onCancel }) {
                 value={form.version}
                 onChange={(e) => updateForm('version', e.target.value)}
                 placeholder="例如: 4.3"
-              />
-            </div>
-            <div className="form-group">
-              <label>期數</label>
-              <input
-                type="number"
-                value={form.period}
-                onChange={(e) => updateForm('period', Number(e.target.value))}
-                min={1}
               />
             </div>
             <div className="form-group">
@@ -476,7 +448,6 @@ function RecordForm({ record, onSave, onCancel }) {
             </div>
           </div>
 
-          {/* 備註 */}
           <div className="form-group">
             <label>備註</label>
             <textarea
@@ -487,7 +458,6 @@ function RecordForm({ record, onSave, onCancel }) {
             />
           </div>
 
-          {/* 截圖 */}
           <div className="form-group">
             <label>截圖 — 點擊框框後可 Ctrl+V 貼上截圖</label>
             <div className="screenshots-form">
